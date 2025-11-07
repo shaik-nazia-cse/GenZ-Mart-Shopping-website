@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenZ Mart</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .home-container {
+      height: 100vh;
+      width: 100vw;
+      background: linear-gradient(135deg, #fa8af1, #f69fef);
+    }
+
+    /* Navbar styling */
+    .navbar {
+      height: 10vh;
+      width: 100%;
+      background-color: #2c0228;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-details {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-details img {
+      height: 3rem;
+      width: auto;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .navbar li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+    }
+
+    .navbar li :hover {
+      color: #f69fef;
+    }
+
+    .navbar i {
+      font-size: 1.6rem;
+      color: white;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fffefe;
+      border-radius: 25px;
+      padding: .8rem 1rem;
+      border: 1px solid #ccc;
+      /* width: 300px; */
+      height: 20px;
+
+    }
+
+    .search input {
+      border: none;
+      outline: none;
+      width: 400px;
+      font-size: 16px;
+      margin-right: 1rem;
+      border-radius: 25px;
+      background-color: #fffefe;
+    }
+
+    .search i {
+      color: #a9089c;
+      font-size: 1.2rem;
+    }
+
+    .search button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .search input::placeholder {
+      color: #aaa;
+      font-size: .8rem;
+    }
+
+    .videoshow {
+      height: 70vh;
+      width: 100vw;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    .videoshow video {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .catgory {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 0.5rem;
+      /* margin-right: 1rem; */
+    }
+
+    .catgory img {
+      height: 5rem;
+      width: 5rem;
+      border-radius: 5rem;
+    }
+
+    .catlog {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 0 10px rgba(35, 39, 39, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 5rem;
+      cursor: pointer;
+    }
+
+    .catlog:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 10px rgba(51, 53, 53, 0.7);
+    }
+
+    .catlog img {
+      display: block;
+      transition: 0.5s ease;
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+
+    .catlog img:hover {
+      transform: scale(1.1);
+      filter: brightness(0.4);
+    }
+
+    .content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(44, 44, 44, 0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.1s ease, transform 0.1s ease-in-out;
+      color: #fff;
+      border: 1rem;
+    }
+
+    .content a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .catlog:hover .content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .products-section {
+      height: 100%;
+      width: 100%;
+      background-color: rgb(234, 232, 232);
+    }
+
+    .products-section h2 {
+      color: #5c0653;
+      padding: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .products-card {
+      height: 100%;
+      width: 88%;
+      margin-left: 4rem;
+      margin-right: 4rem;
+      /* background-color: #b25656; */
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-auto-rows: 300px;
+      gap: 1rem;
+    }
+
+    .cards {
+      background-color: rgb(236, 234, 234);
+      border-radius: 1rem;
+      border: 1px solid white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .cards:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .cards img {
+      height: 65%;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .cards-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      gap: .5rem;
+      padding: .4rem;
+      padding-left: .4rem;
+    }
+
+    .cards-content p {
+      color: #5c0653;
+      font-size: .7rem;
+      font-weight: 400;
+    }
+
+    .cards-content span {
+      color: #2b0327;
+      font-weight: bold;
+    }
+
+    .cards-content button {
+      border-radius: 2rem;
+      background-color: #2c0228;
+      color: #ffffff;
+      padding: .3rem;
+      width: 7rem;
+      height: 2rem;
+      font-weight: 600;
+      font-size: .8rem;
+    }
+
+    .cards-content button:hover {
+      background-color: #45053e;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="home-container">
+      <nav class="navbar">
+        <div class="nav-details">
+          <img src="images/logo.png" alt="GenZ Mart Logo" />
+          <div class="search">
+            <input type="text" placeholder="Search products...">
+            <button><i class='bx  bx-search'></i>
+            </button>
+          </div>
+
+          <ul>
+            <!-- <li>
+              <a href="#"><i class='bx bx-home'></i></a>
+            </li> -->
+            <li>
+              <a href="#"><i class="bx bx-cart"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="bx bx-user"></i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="videoshow">
+        <video src="images/video2.mp4" autoplay muted loop></video>
+      </div>
+      <div class="catgory">
+        <div class="catlog">
+          <img src="images/shoes.jpeg" alt="shoes" />
+          <div class="content">
+            <a href="#">
+              <h5>FootWear</h5>
+            </a>
+          </div>
+        </div>
+        <div class="catlog">
+          <img src="images/makeup.jpeg" alt="makeup" />
+          <div class="content">
+            <a href="#">
+              <h5>Beauty</h5>
+            </a>
+          </div>
+        </div>
+        <div class="catlog">
+          <img src="images/mens.webp" alt="mens" />
+          <div class="content">
+            <a href="#">
+              <h5>Mens</h5>
+            </a>
+          </div>
+        </div>
+        <!-- <img src="images/images (1).jpeg" alt="womens"> -->
+        <div class="catlog">
+          <img src="images/spoonjpeg.jpeg" alt="kitchens" />
+          <div class="content">
+            <a href="#">
+              <h5>Kitchen</h5>
+            </a>
+          </div>
+        </div>
+        <div class="catlog">
+          <img src="images/Decor-.jpg" alt="home-decoration" />
+          <div class="content">
+            <a href="#">
+              <h5>Home Decor</h5>
+            </a>
+          </div>
+        </div>
+        <div class="catlog">
+          <img src="images/kurtaset.webp" alt="kurtaset" />
+          <div class="content">
+            <a href="#">
+              <h5>women</h5>
+            </a>
+          </div>
+        </div>
+        <div class="catlog">
+          <img src="images/laptop.jpeg" alt="laptop" />
+          <div class="content">
+            <a href="#">
+              <h5>electronic</h5>
+            </a>
+          </div>
+        </div>
+        <div class="catlog">
+          <img src="images/sandals.jpeg" alt="sandals" />
+          <div class="content">
+            <a href="#">
+              <h5>FootWear</h5>
+            </a>
+          </div>
+        </div>
+        <div class="catlog">
+          <img src="images/artificial-jewellery-500x500.webp" alt="jewellwery" />
+          <div class="content">
+            <a href="#">
+              <h5>Jewellwery</h5>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="products-section">
+      <h2>Products For You</h2>
+      <div class="products-card">
+        <div class="cards">
+          <img src="images/kurtaset.webp" alt="kurtaset" />
+          <div class="cards-content">
+            <p>Anouk Printed Cotton Kurta Set.</p>
+            <span>&#8377;250</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/laptop.jpeg" alt="" />
+          <div class="cards-content">
+            <p>HP Pavilion 14 Laptop.</p>
+            <span>&#8377;25500</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/makeup.jpeg" alt="" />
+          <div class="cards-content">
+            <p>Maybelline Fit Me Makeup Kit</p>
+            <span>&#8377;250</span>
+            <button>Add to Cart</button>
+          </div>
+
+        </div>
+        <div class="cards">
+          <img src="images/shoes.jpeg" alt="" />
+          <div class="cards-content">
+            <p>Nike Air Zoom Sneakers</p>
+            <span>&#8377;550</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/watch.jpeg" alt="" />
+          <div class="cards-content">
+            <p>Timex Women's Reader Watch</p>
+            <span>&#8377;350</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/westerns.webp" alt="" />
+          <div class="cards-content">
+            <p>Levi’s Slim Fit Denim Shirt</p>
+            <span>&#8377;650</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/phone.avif" alt="" />
+          <div class="cards-content">
+            <p>Samsung Galaxy S23</p>
+            <span>&#8377;28950</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/mens.webp" alt="" />
+          <div class="cards-content">
+            <p>Levi’s Slim Fit Denim Shirt</p>
+            <span>&#8377;2050</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/ear_rings.avif" alt="" />
+          <div class="cards-content">
+            <p>Beautiful earings</p>
+            <span>&#8377;200</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/saree.avif" alt="" />
+          <div class="cards-content">
+            <p>Prety Saree comfortable</p>
+            <span>&#8377;500</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/kids_frok.avif" alt="" />
+          <div class="cards-content">
+            <p>Pink Kids Frok</p>
+            <span>&#8377;399</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/phone_case.avif" alt="" />
+          <div class="cards-content">
+            <p>Foldable Phone Cover</p>
+            <span>&#8377;290</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/Oily_Skin_Squad_Kit.webp" alt="" />
+          <div class="cards-content">
+            <p>Oily_Skin_Squad_Kit</p>
+            <span>&#8377;590</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/saree-1.avif" alt="" />
+          <div class="cards-content">
+            <p>Prety Black Saree</p>
+            <span>&#8377;699</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+        <div class="cards">
+          <img src="images/tshirt.avif" alt="" />
+          <div class="cards-content">
+            <p>Half Sleev T-shirt</p>
+            <span>&#8377;290</span>
+            <button>Add to Cart</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
